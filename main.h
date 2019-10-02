@@ -14,6 +14,8 @@
 # define MAIN_H
 # include <stdio.h>
 # include "libft/inc/libft.h"
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct	s_v2
 {
@@ -35,6 +37,7 @@ typedef struct	s_field
 	t_v2		map_size;
 	t_v2		piece_size;
 	char		**map;
+	int			**heatmap;
 	char		**piece;
 }				t_field;
 typedef struct	s_game
