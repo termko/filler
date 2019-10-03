@@ -6,7 +6,7 @@
 /*   By: ydavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:10:12 by ydavis            #+#    #+#             */
-/*   Updated: 2019/10/01 23:13:00 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/10/03 21:22:55 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft/inc/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
+# include <fcntl.h>
 
 typedef struct	s_v2
 {
@@ -40,9 +42,16 @@ typedef struct	s_field
 	int			**heatmap;
 	char		**piece;
 }				t_field;
+typedef struct	s_point
+{
+	t_v2			p;
+	int				score;
+	struct s_point	*next;
+}				t_point;
 typedef struct	s_game
 {
 	t_players	players;
 	t_field		field;
+	t_point		*places;
 }				t_game;
 #endif
