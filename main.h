@@ -6,7 +6,7 @@
 /*   By: ydavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:10:12 by ydavis            #+#    #+#             */
-/*   Updated: 2019/10/03 21:22:55 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/10/04 08:16:07 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_point
 {
 	t_v2			p;
 	int				score;
+	int				from_center;
 	struct s_point	*next;
 }				t_point;
 typedef struct	s_game

@@ -6,7 +6,7 @@
 /*   By: ydavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 19:45:53 by ydavis            #+#    #+#             */
-/*   Updated: 2019/10/04 07:03:06 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/10/04 08:43:42 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,9 +348,11 @@ int		best_choice(t_game *game)
 {
 	t_v2	best;
 	int		sum;
+	int		from_center;
 	t_point	*tmp;
 
 	sum = -1;
+	from_center = -1;
 	best.x = -1;
 	best.y = -1;
 	tmp = game->places;
@@ -359,6 +361,13 @@ int		best_choice(t_game *game)
 		if (tmp->score < sum || sum == -1)
 		{
 			sum = tmp->score;
+			from_center = tmp->from_center;
+			best = tmp->p;
+		}
+		else if (tmp->score - sum < (tmp->from_center - from_center) / 2 && (tmp->from_center < from_center || from_center < -1))
+		{
+			sum = tmp->score;
+			from_center = tmp->from_center;
 			best = tmp->p;
 		}
 		tmp = tmp->next;
@@ -393,7 +402,6 @@ int		can_put(t_game *game, int i, int j)
 				return (-1);
 			if (game->field.piece[k][l] == '*')
 			{
-//				fprintf(stderr, "%d %d %d %d\n", i, j, k, l);
 				if (ft_toupper(game->field.map[k + i][l + j]) == game->players.opponent.letter)
 					return (-1);
 				if (ft_toupper(game->field.map[k + i][l + j]) == game->players.me.letter)
@@ -416,6 +424,14 @@ int		can_put(t_game *game, int i, int j)
 	return (sum);
 }
 
+int		calc_from_center(t_game *game, int i, int j)
+{
+	int		ret;
+
+	ret = ft_abs(i - game->field.map_size.x / 2) + ft_abs(j - game->field.map_size.y / 2);
+	return (ret);
+}
+
 void	put_piece(t_game *game, int sum, int i, int j)
 {
 	t_point *tmp;
@@ -436,6 +452,7 @@ void	put_piece(t_game *game, int sum, int i, int j)
 	tmp->p.x = i;
 	tmp->p.y = j;
 	tmp->score = sum;
+	tmp->from_center = calc_from_center(game, i, j);
 	tmp->next = NULL;
 }
 
