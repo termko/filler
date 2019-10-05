@@ -6,22 +6,21 @@
 /*   By: vellery- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 19:58:08 by vellery-          #+#    #+#             */
-/*   Updated: 2019/10/04 04:19:51 by ydavis           ###   ########.fr       */
+/*   Updated: 2019/10/05 17:34:33 by ydavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	int copy;
 	int i;
 
 	if (n == -2147483648)
 	{
-		if (ft_putstr_fd("-2147483648", fd))
-			return (-1);
-		return (0);
+		ft_putstr_fd("-2147483648", fd);
+		return ;
 	}
 	if (n < 0)
 	{
@@ -37,9 +36,7 @@ int		ft_putnbr_fd(int n, int fd)
 	}
 	while (i > 0)
 	{
-		if (ft_putchar_fd(n / i % 10 + '0', fd))
-			return (-1);
+		ft_putchar_fd(n / i % 10 + '0', fd);
 		i = i / 10;
 	}
-	return (0);
 }
